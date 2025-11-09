@@ -145,12 +145,16 @@ void Stromzaehler::runLoop() {
 		}
 		payload += to_string(pSend);
 
+		//cout << "Payload: " << payload << endl;
+
 
 		// 6) Antwort-Frame zusammenbauen: STX + payload + ETX + '\n'
 		string rsp = "";
 		if (fehlerKeinSTX) {
 			rsp += '@'; // falscher Start (kein STX)
 			cout << "(Fehler injiziert: Kein STX)" << endl;
+			rsp += "ERROR";
+
 		}
 		else 
 		{
@@ -162,6 +166,9 @@ void Stromzaehler::runLoop() {
 		if (fehlerKeinETX) 
 		{
 			cout << "(Fehler injiziert: Kein ETX)" << endl;
+			rsp += "ERROR";
+			
+			
 		}
 		else 
 		{
